@@ -11,8 +11,7 @@ const findMatches = (data) => {
     const matches = data.match(regex);
     let total = 0;
     matches === null || matches === void 0 ? void 0 : matches.forEach((mul) => {
-        const numRegex = /[0-9]+/g;
-        const numMatches = mul.match(numRegex);
+        const numMatches = mul.match(/[0-9]+/g);
         if (numMatches === null || numMatches === void 0 ? void 0 : numMatches.length) {
             total += +numMatches[0] * +numMatches[1];
         }
@@ -26,7 +25,6 @@ const findMatchesWhenTold = (data) => {
     for (let i = 0; i < splitData.length; i++) {
         allowedMemory.push(splitData[i].split("don't()")[0]);
     }
-    console.log(allowedMemory);
     const regex = /mul\([0-9]+,[0-9]+\)/g;
     const matches = allowedMemory.join("").match(regex);
     let total = 0;
