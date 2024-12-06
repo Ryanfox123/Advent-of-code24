@@ -15,6 +15,7 @@ SMSMSASXSS
 SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX`;
+//task 1
 const checkFull = (wordsearch) => {
     const splitByLine = wordsearch.split("\n");
     const lineLength = splitByLine[0].length;
@@ -92,3 +93,52 @@ const checkDiagonal = (arr, ypos, xpos) => {
     return total;
 };
 checkFull(text);
+//task 2
+const task2test = `.M.S......
+..A..MSMS.
+.M.S.MAA..
+..A.ASMSM.
+.M.S.M....
+..........
+S.S.S.S.S.
+.A.A.A.A..
+M.M.M.M.M.
+..........`;
+const checkFull2 = (wordsearch) => {
+    const splitByLine = wordsearch.split("\n");
+    const lineLength = splitByLine[0].length;
+    let total = 0;
+    for (let i = 0; i < splitByLine.length; i++) {
+        for (let j = 0; j < lineLength; j++) {
+            if (splitByLine[i][j] === "A") {
+                checkCross(splitByLine, i, j) >= 2 ? (total += 1) : null;
+            }
+        }
+    }
+    console.log(total);
+};
+const checkCross = (arr, ypos, xpos) => {
+    let total = 0;
+    const width = arr[0].length;
+    const height = arr.length;
+    if (xpos >= 1 && ypos >= 1 && xpos <= width - 2 && ypos <= height - 2) {
+        //bottom right to top left
+        if (arr[ypos + 1][xpos + 1] === "M" && arr[ypos - 1][xpos - 1] === "S") {
+            total++;
+        }
+        //bottom left to top right
+        if (arr[ypos + 1][xpos - 1] === "M" && arr[ypos - 1][xpos + 1] === "S") {
+            total++;
+        }
+        // top right to bottom left
+        if (arr[ypos - 1][xpos + 1] === "M" && arr[ypos + 1][xpos - 1] === "S") {
+            total++;
+        }
+        // top left to bottom right
+        if (arr[ypos - 1][xpos - 1] === "M" && arr[ypos + 1][xpos + 1] === "S") {
+            total++;
+        }
+    }
+    return total;
+};
+checkFull2(text);
